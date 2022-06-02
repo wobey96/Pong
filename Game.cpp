@@ -79,6 +79,21 @@ void Game::GenerateOutput()
 {
 	std::cout << " Call from GenerateOutput Fucntion" << std::endl; 
 	// Graphics drawing code goes here
+	SDL_SetRenderDrawColor(mRenderer, 255, 255, 255, 255); // blue screen 
+	SDL_RenderClear(mRenderer); 
+
+	/* Draw game world object here. Afer clearing back buffer but before swapping */
+	struct Vector2
+	{
+		float x; 
+		float y; 
+	};
+
+	const int thickness = 15; // thickness of walls 
+	SDL_Rect wall{ 0, 0, 1024, thickness };
+	SDL_RenderFillRect(mRenderer, &wall);
+
+	SDL_RenderPresent(mRenderer); 
 
 }
 
