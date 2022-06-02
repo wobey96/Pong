@@ -24,4 +24,6 @@ class Game
 		SDL_Window* mWindow; 
 		// Game should continue to run 
 		bool mIsRunning; 
+		// SDL Render Variable 
+		SDL_Renderer* mRenderer; 
 };

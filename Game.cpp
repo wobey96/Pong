@@ -5,7 +5,8 @@ Game::Game()
 {
 	mWindow = nullptr; 
 	mIsRunning = true; 
-	std::cout << " Constructor Created " << std::endl; 
+	std::cout << " Constructor Created " << std::endl;
+	mRenderer = nullptr; 
 }
 
 bool Game::Initialize()
@@ -18,12 +19,20 @@ bool Game::Initialize()
 		return false;
 	}
 
+	// Creating the window
 	mWindow = SDL_CreateWindow(" Pong", 100, 100, 1024, 768, 0); 
-
 	if (!mWindow)
 	{
 		SDL_Log(" Failed to create window: %s ", SDL_GetError()); 
 		return false; 
+	}
+
+	// Creating the renderer
+	mRenderer = SDL_CreateRenderer(mWindow, -1, (SDL_RENDERER_ACCELERATED | SDL_RENDERER_PRESENTVSYNC) ); // enabling vsync
+	if (!mRenderer)
+	{
+		SDL_Log(" Failed to create renderer: %s ", SDL_GetError());
+		return false;
 	}
 
 	return true; 
@@ -69,6 +78,8 @@ void Game::UpdateGame()
 void Game::GenerateOutput()
 {
 	std::cout << " Call from GenerateOutput Fucntion" << std::endl; 
+	// Graphics drawing code goes here
+
 }
 
 
@@ -77,6 +88,7 @@ void Game::Shutdown()
 {
 	SDL_DestroyWindow(mWindow); 
 	SDL_Quit(); 
+	SDL_DestroyRenderer(mRenderer); 
 }
 
 void Game::RunLoop()
