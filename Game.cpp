@@ -1,12 +1,20 @@
 #include "Game.h"
 
+const int thickness = 15; // thickness of walls 
+const int SCREEN_MAX_WIDTH = 1024;
 
 Game::Game()
 {
+	std::cout << " Constructor Created " << std::endl;
+
 	mWindow = nullptr; 
 	mIsRunning = true; 
-	std::cout << " Constructor Created " << std::endl;
 	mRenderer = nullptr; 
+	mBallPos.x = SCREEN_MAX_WIDTH / 2; 
+	mBallPos.y = SCREEN_MAX_WIDTH / 2; 
+	mPaddlePos.x = 0; 
+	mPaddlePos.y = SCHAR_MAX / 2; 
+
 }
 
 bool Game::Initialize()
@@ -78,22 +86,32 @@ void Game::UpdateGame()
 void Game::GenerateOutput()
 {
 	std::cout << " Call from GenerateOutput Fucntion" << std::endl; 
+
 	// Graphics drawing code goes here
-	SDL_SetRenderDrawColor(mRenderer, 255, 255, 255, 255); // blue screen 
-	SDL_RenderClear(mRenderer); 
+	SDL_SetRenderDrawColor(mRenderer, 0, 0, 255, 255); // color screen 
+
+	SDL_RenderClear(mRenderer); // clear back buffer to the current draw color
 
 	/* Draw game world object here. Afer clearing back buffer but before swapping */
-	struct Vector2
-	{
-		float x; 
-		float y; 
-	};
 
-	const int thickness = 15; // thickness of walls 
-	SDL_Rect wall{ 0, 0, 1024, thickness };
+	SDL_SetRenderDrawColor(mRenderer, 255, 255, 255, 255); // drawing wall
+
+	// Top Wall
+	SDL_Rect wall{ 0, 0, SCREEN_MAX_WIDTH, thickness };
 	SDL_RenderFillRect(mRenderer, &wall);
 
-	SDL_RenderPresent(mRenderer); 
+	// Bottom Wall
+	wall.y = 768 - thickness; 
+	SDL_RenderFillRect(mRenderer, &wall);
+
+	// Right Wall
+	wall.x = SCREEN_MAX_WIDTH - thickness;
+	wall.y = 0; 
+	wall.w = thickness; 
+	wall.h = SCREEN_MAX_WIDTH; 
+	SDL_RenderFillRect(mRenderer, &wall); 
+
+	SDL_RenderPresent(mRenderer); // sawap front and back buffer 
 
 }
 
