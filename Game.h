@@ -21,6 +21,7 @@ class Game
 		void RunLoop(); 
 		// Shutdown the game 
 		void Shutdown(); 
+
 		void HelloTest();
 	private:
 		// Helper functions for the game loop 

@@ -2,6 +2,7 @@
 
 const int thickness = 15; // thickness of walls 
 const int SCREEN_MAX_WIDTH = 1024;
+const float paddleH = 100.0f;
 
 Game::Game()
 {
@@ -10,10 +11,12 @@ Game::Game()
 	mWindow = nullptr; 
 	mIsRunning = true; 
 	mRenderer = nullptr; 
+
 	mBallPos.x = SCREEN_MAX_WIDTH / 2; 
 	mBallPos.y = SCREEN_MAX_WIDTH / 2; 
+
 	mPaddlePos.x = 0; 
-	mPaddlePos.y = SCHAR_MAX / 2; 
+	mPaddlePos.y = SCREEN_MAX_WIDTH / 2;
 
 }
 
@@ -110,6 +113,30 @@ void Game::GenerateOutput()
 	wall.w = thickness; 
 	wall.h = SCREEN_MAX_WIDTH; 
 	SDL_RenderFillRect(mRenderer, &wall); 
+
+	// Paddle 
+	SDL_Rect paddle
+	{
+		static_cast<int>(mPaddlePos.x),
+		static_cast<int>(mPaddlePos.y - paddleH / 2),
+		thickness,
+		static_cast<int>(paddleH)
+	};
+	SDL_RenderFillRect(mRenderer, &paddle);
+
+
+	// Ball
+	SDL_Rect ball
+	{
+		static_cast<int>(mBallPos.x - thickness / 2),
+		static_cast<int>(mBallPos.y - thickness / 2),
+		thickness,
+		thickness
+	};
+	SDL_RenderFillRect(mRenderer, &ball);
+
+
+
 
 	SDL_RenderPresent(mRenderer); // sawap front and back buffer 
 
