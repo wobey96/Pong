@@ -4,6 +4,8 @@ const int thickness = 15; // thickness of walls
 const int SCREEN_MAX_WIDTH = 1024;
 const float paddleH = 100.0f;
 
+// getting back into this: Simple Test
+
 Game::Game()
 {
 	std::cout << " Constructor Created " << std::endl;
