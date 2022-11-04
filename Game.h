@@ -29,7 +29,7 @@ class Game
 		void UpdateGame(); 
 		void GenerateOutput(); 
 
-		// Widdow created by SDL 
+		// Window created by SDL 
 		SDL_Window* mWindow; 
 
 		// Game should continue to run 
