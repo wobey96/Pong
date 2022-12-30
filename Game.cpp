@@ -5,6 +5,7 @@ const int SCREEN_MAX_WIDTH = 1024;
 const float paddleH = 100.0f;
 
 // getting back into this: Simple Test
+// another simple test 12/30/2022
 
 Game::Game()
 {
