@@ -92,9 +92,20 @@ void Game::ProcessInput()
 void Game::UpdateGame()
 {
 	std::cout << " Call from UpdateGame Fucntion" << std::endl;
+
+	// Wait until 16ms has elapsed since last frame
+	while (!SDL_TICKS_PASSED(SDL_GetTicks(), mTicksCount + 16));
 	
 	// Delta Time is the difference in ticks from last screen converted to seconds
 	float deltaTime = (SDL_GetTicks() - mTicksCount) / 1000.0f; 
+
+	// Clamp maximum delta time value 
+	if (deltaTime > 0.05f)
+	{
+		deltaTime = 0.05f;
+	}
+
+	// TODO: Update object in game world as functino of delta time!
 
 	// Update Tick counts (for next frame)
 	mTicksCount = SDL_GetTicks(); 
