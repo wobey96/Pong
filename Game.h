@@ -44,4 +44,7 @@ class Game
 		// vector for ball's position 
 		Vector2 mBallPos; 
 
+		//Frame Rate Calculation variable 
+		Uint32 mTicksCount; 
+
 };

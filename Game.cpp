@@ -12,9 +12,13 @@ Game::Game()
 {
 	std::cout << " Constructor Created " << std::endl;
 
+
+
 	mWindow = nullptr; 
 	mIsRunning = true; 
 	mRenderer = nullptr; 
+
+	mTicksCount = 0;
 
 	mBallPos.x = SCREEN_MAX_WIDTH / 2; 
 	mBallPos.y = SCREEN_MAX_WIDTH / 2; 
@@ -88,6 +92,15 @@ void Game::ProcessInput()
 void Game::UpdateGame()
 {
 	std::cout << " Call from UpdateGame Fucntion" << std::endl;
+	
+	// Delta Time is the difference in ticks from last screen converted to seconds
+	float deltaTime = (SDL_GetTicks() - mTicksCount) / 1000.0f; 
+
+	// Update Tick counts (for next frame)
+	mTicksCount = SDL_GetTicks(); 
+
+	// TODO: Update object in game world as function of delta time 
+	// update(deltaTime)
 }
 
 void Game::GenerateOutput()
