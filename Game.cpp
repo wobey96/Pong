@@ -26,6 +26,8 @@ Game::Game()
 	mPaddlePos.x = 0; 
 	mPaddlePos.y = SCREEN_MAX_WIDTH / 2;
 
+	mPaddleDir = 0;
+
 }
 
 bool Game::Initialize()
@@ -87,6 +89,18 @@ void Game::ProcessInput()
 	{
 		mIsRunning = false; 
 	}
+
+	mPaddleDir = 0; 
+	if (state[SDL_SCANCODE_W])
+	{
+		mPaddleDir -= 1; 
+	}
+	if (state[SDL_SCANCODE_S])
+	{
+		mPaddleDir += 1; 
+	}
+
+
 }
 
 void Game::UpdateGame()
@@ -106,6 +120,19 @@ void Game::UpdateGame()
 	}
 
 	// TODO: Update object in game world as functino of delta time!
+	if (mPaddleDir != 0)
+	{
+		mPaddlePos.y += mPaddleDir * 300.0f * deltaTime;
+		// Make sure paddle doesn't move off screen!
+		if (mPaddlePos.y < (paddleH / 2.0f + thickness))
+		{
+			mPaddlePos.y = paddleH / 2.0f + thickness;
+		}
+		else if (mPaddlePos.y > (768.0f - paddleH / 2.0f - thickness))
+		{
+			mPaddlePos.y = 768.0f - paddleH / 2.0f - thickness;
+		}
+	}
 
 	// Update Tick counts (for next frame)
 	mTicksCount = SDL_GetTicks(); 
