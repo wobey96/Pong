@@ -47,6 +47,8 @@ class Game
 		//Frame Rate Calculation variable 
 		Uint32 mTicksCount; 
 
+		Vector2 mBallVel;
+
 		// Direction of paddle
 		int mPaddleDir;
 
